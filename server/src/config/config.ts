@@ -6,22 +6,8 @@ import * as os from "os";
 envConfig();
 const ifaces = os.networkInterfaces();
 
-function getLocalIPv4Address(): string {
-  const personalIp: string = process.env.LOCAL_IP!;
-  if (personalIp) return personalIp;
-
-  const networkInterfaces = os.networkInterfaces();
-  for (const interfaceName in networkInterfaces) {
-    const interfaces = networkInterfaces[interfaceName];
-    if (interfaces) {
-      for (const iface of interfaces) {
-        if (iface.family === "IPv4" && !iface.internal) {
-          return iface.address;
-        }
-      }
-    }
-  }
-  return "";
+function getLocalIPv4Address() {
+  return String(process.env.LOCAL_IP!);
 }
 
 export const config = {
@@ -82,7 +68,7 @@ export const config = {
         {
           ip: "0.0.0.0",
           announcedIp: getLocalIPv4Address(),
-          family: 4 
+          family: 4,
         },
       ],
       maxIncomingBitrate: 1500000,
