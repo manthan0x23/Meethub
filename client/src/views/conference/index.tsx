@@ -542,166 +542,211 @@ const RoomIndex = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-dark flex flex-col overflow-hidden text-white p-0">
-      <div className="h-[100vh] w-full flex justify-center items-center p-1 ">
-        <div className="h-full w-[5vw] flex flex-col justify-center items-center gap-3 transition-all">
+    <div className="h-screen w-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black flex flex-col overflow-hidden text-white">
+      <div className="h-full w-full flex justify-center items-center p-2 lg:p-4">
+        {/* Control Panel */}
+        <div className="h-full w-16 lg:w-20 flex flex-col justify-center items-center gap-2 lg:gap-4 transition-all">
           <div
             onClick={turnVideoOn}
             className={twMerge(
-              " transition-all h-[3rem] w-[3rem] border-2 bg-white hover:bg-white/85 cursor-pointer text-gradient-to-r from-blue-500 to-blue-700 text-blue-500 text-xl flex justify-center items-center rounded-full",
-              !IsVideoOn && "text-red-600"
+              "group transition-all duration-300 h-12 w-12 lg:h-14 lg:w-14 border-2 bg-white/95 hover:bg-white hover:scale-110 cursor-pointer text-blue-600 text-lg lg:text-xl flex justify-center items-center rounded-full shadow-lg hover:shadow-xl backdrop-blur-sm",
+              !IsVideoOn && "text-red-500 bg-red-50 border-red-200 hover:bg-red-100"
             )}
           >
             {IsVideoOn ? <FaVideo /> : <FaVideoSlash />}
           </div>
+          
           <div
             onClick={turnMicOn}
             className={twMerge(
-              " transition-all h-[3rem] w-[3rem] border-2 bg-white hover:bg-white/85 cursor-pointer text-gradient-to-r from-blue-500 to-blue-700 text-blue-500 text-xl flex justify-center items-center rounded-full",
-              !IsMicOn && "text-red-600"
+              "group transition-all duration-300 h-12 w-12 lg:h-14 lg:w-14 border-2 bg-white/95 hover:bg-white hover:scale-110 cursor-pointer text-blue-600 text-lg lg:text-xl flex justify-center items-center rounded-full shadow-lg hover:shadow-xl backdrop-blur-sm",
+              !IsMicOn && "text-red-500 bg-red-50 border-red-200 hover:bg-red-100"
             )}
           >
             {IsMicOn ? <TbMicrophoneFilled /> : <TbMicrophoneOff />}
           </div>
+          
           <div
             onClick={() => setIsChatActive((v) => !v)}
             className={twMerge(
-              " transition-all h-[3rem] w-[3rem] border-2 bg-white hover:bg-white/85 cursor-pointer hover:text-blue-600  text-black text-2xl flex justify-center items-center rounded-full",
-              IsChatActive && "text-blue-600"
+              "group transition-all duration-300 h-12 w-12 lg:h-14 lg:w-14 border-2 bg-white/95 hover:bg-white hover:scale-110 cursor-pointer text-gray-700 hover:text-blue-600 text-xl lg:text-2xl flex justify-center items-center rounded-full shadow-lg hover:shadow-xl backdrop-blur-sm",
+              IsChatActive && "text-blue-600 bg-blue-50 border-blue-200"
             )}
           >
             <PiChatsTeardropDuotone />
           </div>
+          
           <div
             onClick={() => setIsWhiteBoardActive((v) => !v)}
             className={twMerge(
-              " transition-all h-[3rem] w-[3rem] border-2 bg-white hover:bg-white/85 cursor-pointer hover:text-blue-600 text-black text-2xl flex justify-center items-center rounded-full",
-              IsWhiteBoardActive && "text-blue-600"
+              "group transition-all duration-300 h-12 w-12 lg:h-14 lg:w-14 border-2 bg-white/95 hover:bg-white hover:scale-110 cursor-pointer text-gray-700 hover:text-blue-600 text-xl lg:text-2xl flex justify-center items-center rounded-full shadow-lg hover:shadow-xl backdrop-blur-sm",
+              IsWhiteBoardActive && "text-blue-600 bg-blue-50 border-blue-200"
             )}
           >
             <PiTelevisionSimple />
           </div>
+          
           <div
             onClick={() => setShowPeople((v) => !v)}
             className={twMerge(
-              "relative  transition-all h-[3rem] w-[3rem] border-2 bg-white hover:bg-white/85 cursor-pointer hover:text-blue-600 text-black text-2xl flex justify-center items-center rounded-full",
-              showPeople && "text-blue-600"
+              "relative group transition-all duration-300 h-12 w-12 lg:h-14 lg:w-14 border-2 bg-white/95 hover:bg-white hover:scale-110 cursor-pointer text-gray-700 hover:text-blue-600 text-xl lg:text-2xl flex justify-center items-center rounded-full shadow-lg hover:shadow-xl backdrop-blur-sm",
+              showPeople && "text-blue-600 bg-blue-50 border-blue-200"
             )}
           >
             <BsPeopleFill />
-            <p className="h-5 w-5  flex items-center justify-center absolute -right-1 -top-1 text-sm bg-red-500 p-1 font-medium text-white rounded-full">
+            <div className="absolute -right-1 -top-1 h-5 w-5 lg:h-6 lg:w-6 flex items-center justify-center text-xs lg:text-sm bg-gradient-to-r from-red-500 to-red-600 font-semibold text-white rounded-full shadow-md animate-pulse">
               {usersInRoom.length + 1}
-            </p>
+            </div>
           </div>
+          
           <div
             onClick={() => {
               navigator.clipboard.writeText(roomId!).then(() => {
                 openSnackbar("Room Id copied to clipboard");
               });
             }}
-            className={twMerge(
-              " transition-all h-[3rem] w-[3rem]  bg-transparent hover:bg-white/10  cursor-pointer text-white/50 hover:text-white/70 text-xl flex justify-center items-center rounded-full"
-            )}
+            className="group transition-all duration-300 h-12 w-12 lg:h-14 lg:w-14 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 cursor-pointer text-white/60 hover:text-white hover:scale-110 text-lg lg:text-xl flex justify-center items-center rounded-full backdrop-blur-sm shadow-lg"
           >
             <FaPaperclip />
           </div>
+          
           <div
             onClick={() => {
               window.location.assign("/");
             }}
-            className={twMerge(
-              " transition-all h-[3rem] w-[3rem]  bg-red-600 text-white hover:bg-white/10  cursor-pointer  hover:text-white/70 text-2xl flex justify-center items-center rounded-full"
-            )}
+            className="group transition-all duration-300 h-12 w-12 lg:h-14 lg:w-14 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white hover:scale-110 cursor-pointer text-xl lg:text-2xl flex justify-center items-center rounded-full shadow-lg hover:shadow-xl"
           >
             <MdCallEnd />
           </div>
         </div>
-        <div className="h-full w-[95vw] p-3 overflow-hidden flex flex-wrap items-center justify-center gap-4">
-          <LocalUserPannel stream={localStream} name={name!} />
-          <UserCarousel
-            usersInRoom={usersInRoom}
-            remoteStreams={remoteStreams}
-            producerContainer={producers}
-            userId={socketRef.current?.id}
-          />
+
+        {/* Video Grid */}
+        <div className="h-full flex-1 p-2 lg:p-4 overflow-hidden">
+          <div className="h-full w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-4 auto-rows-fr">
+            <LocalUserPannel stream={localStream} name={name!} />
+            <UserCarousel
+              usersInRoom={usersInRoom}
+              remoteStreams={remoteStreams}
+              producerContainer={producers}
+              userId={socketRef.current?.id}
+            />
+          </div>
         </div>
-        <Dialog open={IsChatActive}>
-          <div className="h-[35vw] w-[60vh] bg-black/95 text-white/80 flex py-2  flex-col items-center justify-center">
-            <div className="h-[10%] w-full flex justify-between items-center px-7">
-              <p className="font-poppins text-2xl font-semibold ">Chat</p>
-              <p
-                className="text-white/60 hover:text-white text-xl cursor-pointer"
+
+        {/* Chat Dialog */}
+        <Dialog 
+          open={IsChatActive}
+          maxWidth="md"
+          fullWidth
+          PaperProps={{
+            style: {
+              backgroundColor: 'transparent',
+              boxShadow: 'none',
+              margin: '16px',
+            }
+          }}
+        >
+          <div className="h-[80vh] max-h-[600px] w-full bg-gray-900/95 backdrop-blur-md border border-gray-700/50 text-white/90 flex flex-col rounded-2xl shadow-2xl">
+            {/* Chat Header */}
+            <div className="flex-shrink-0 h-16 w-full flex justify-between items-center px-6 border-b border-gray-700/50">
+              <h2 className="font-semibold text-xl lg:text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Chat
+              </h2>
+              <button
+                className="text-gray-400 hover:text-white text-xl lg:text-2xl cursor-pointer transition-colors duration-200 p-2 hover:bg-gray-800/50 rounded-full"
                 onClick={() => setIsChatActive(false)}
               >
                 <RxCross2 />
-              </p>
+              </button>
             </div>
-            <div className="h-[90%] w-full px-7 flex flex-col items-center justify-center">
-              <div className="h-[93%] w-full py-2">
-                {roomChat && (
-                  <RoomChat
-                    roomChat={roomChat}
-                    userId={socketRef.current?.id!}
-                  />
-                )}
-              </div>
-              <div className="h-[7%] w-full  flex justify-center items-center gap-3">
-                <input
-                  onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
-                    if (event.key === "Enter") {
-                      const message = {
-                        user: { id: socketRef.current!.id!, name: name! },
-                        data: roomChatValue,
-                        createdAt: new Date(),
-                      };
-                      if (message.data !== null) {
-                        //@ts-ignore
-                        setRoomChat((v) => [...v, message]);
-                        //@ts-ignore
-                        sendRoomChat(message);
-                      }
-                    }
-                  }}
-                  value={roomChatValue || ""}
-                  onChange={(e) => {
-                    setRoomChatValue(e.target.value);
-                  }}
-                  placeholder="Enter your message here"
-                  className="placeholder:italic focus:border-2 focus:border-blue-500/30 placeholder:text-white/60 p-2 text-[1rem] outline-none border h-full w-[80%] border-white/50  focus-within:ring-[1.5px] focus:ring-blue-600 rounded-md bg-transparent  text-white/80"
+            
+            {/* Chat Messages */}
+            <div className="flex-1 px-6 py-4 overflow-hidden">
+              {roomChat && (
+                <RoomChat
+                  roomChat={roomChat}
+                  userId={socketRef.current?.id!}
                 />
-                <button
-                  onClick={() => {
+              )}
+            </div>
+            
+            {/* Chat Input */}
+            <div className="flex-shrink-0 h-16 px-6 pb-4 flex items-center gap-3">
+              <input
+                onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+                  if (event.key === "Enter") {
                     const message = {
                       user: { id: socketRef.current!.id!, name: name! },
-                      data: roomChatValue?.trim(),
+                      data: roomChatValue,
                       createdAt: new Date(),
                     };
                     if (message.data !== null) {
-                      // @ts-ignore
+                      //@ts-ignore
                       setRoomChat((v) => [...v, message]);
-                      // @ts-ignore
+                      //@ts-ignore
                       sendRoomChat(message);
                     }
-                  }}
-                  className="w-[15%] h-full bg-white/90 rounded-md text-black font-poppins font-medium hover:bg-white/70"
-                >
-                  Send
-                </button>
-              </div>
+                  }
+                }}
+                value={roomChatValue || ""}
+                onChange={(e) => {
+                  setRoomChatValue(e.target.value);
+                }}
+                placeholder="Type your message..."
+                className="flex-1 bg-gray-800/50 border border-gray-600/50 focus:border-blue-400/50 focus:ring-2 focus:ring-blue-400/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 outline-none transition-all duration-200"
+              />
+              <button
+                onClick={() => {
+                  const message = {
+                    user: { id: socketRef.current!.id!, name: name! },
+                    data: roomChatValue?.trim(),
+                    createdAt: new Date(),
+                  };
+                  if (message.data !== null) {
+                    // @ts-ignore
+                    setRoomChat((v) => [...v, message]);
+                    // @ts-ignore
+                    sendRoomChat(message);
+                  }
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl text-white font-medium transition-all duration-200 hover:scale-105 shadow-lg"
+              >
+                Send
+              </button>
             </div>
           </div>
         </Dialog>
       </div>
+      
+      {/* Enhanced Snackbar */}
       <Snackbar
         open={notificationBar.open}
         autoHideDuration={6000}
         message={notificationBar.data}
         action={
-          <Button onClick={closeSnackBar} color="primary" size="small">
+          <Button 
+            onClick={closeSnackBar} 
+            sx={{ 
+              color: '#60a5fa',
+              '&:hover': {
+                backgroundColor: 'rgba(96, 165, 250, 0.1)'
+              }
+            }}
+            size="small"
+          >
             <RxCross2 />
           </Button>
         }
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: 'rgba(17, 24, 39, 0.95)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(75, 85, 99, 0.3)',
+            borderRadius: '12px',
+            color: 'white',
+          }
+        }}
       />
     </div>
   );
@@ -726,43 +771,50 @@ const RoomChat = ({
   useEffect(() => {
     scrollToBottom();
   }, [roomChat]);
+  
   return (
     <div
       ref={scrollRef}
-      className="h-full w-full  flex flex-col overflow-y-scroll overflow-x-hidden chatScrollBar "
+      className="h-full w-full flex flex-col overflow-y-auto overflow-x-hidden chatScrollBar space-y-4"
     >
       {bundledChat &&
         bundledChat.map((bundle, index) => (
           <div
             key={index}
-            className="flex flex-col gap-2 items-start justify-center mb-3"
+            className="flex flex-col gap-3 animate-in slide-in-from-bottom-2 duration-300"
           >
-            <div className=" flex justify-start items-center gap-2">
-              <Avvvatars value={bundle.user.name} size={22} />
-              <div className="flex flex-col justify-center items-start">
-                <p
-                  className={twMerge(
-                    bundle.user.id === userId && "text-pink-500"
-                  )}
-                >
+            {/* User Info */}
+            <div className="flex justify-start items-center gap-3">
+              <div className="flex-shrink-0">
+                <Avvvatars value={bundle.user.name} size={32} />
+              </div>
+              <div className="flex flex-col">
+                <p className={twMerge(
+                  "font-medium text-sm lg:text-base",
+                  bundle.user.id === userId ? "text-blue-400" : "text-white"
+                )}>
                   {bundle.user.id === userId ? "You" : bundle.user.name}
                 </p>
-                <p className="text-[9px] text-white/60 h-full  flex items-center justify-end">
+                <p className="text-xs text-gray-400">
                   {moment(bundle.messages[0].createdAt).format("LT")}
                 </p>
               </div>
             </div>
 
-            <div className="flex w-full flex-col ml-5">
-              {bundle.messages.map((chat, index) => (
+            {/* Messages */}
+            <div className="flex flex-col space-y-2 ml-11">
+              {bundle.messages.map((chat, messageIndex) => (
                 <div
-                  key={index}
-                  className={
-                    "h-auto w-full px-2 flex items-center justify-start mb-1"
-                  }
+                  key={messageIndex}
+                  className="flex items-start"
                 >
-                  <div className="bg-blue-700 py-[3px] text-white w-auto inline-block pl-2 pr-4 rounded-md font-sans">
-                    <p className="text-[1rem]">{chat.data}</p>
+                  <div className={twMerge(
+                    "inline-block px-4 py-2 rounded-2xl max-w-sm lg:max-w-md break-words",
+                    bundle.user.id === userId 
+                      ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg" 
+                      : "bg-gray-700/50 text-white border border-gray-600/50"
+                  )}>
+                    <p className="text-sm lg:text-base leading-relaxed">{chat.data}</p>
                   </div>
                 </div>
               ))}
@@ -781,6 +833,7 @@ const LocalUserPannel = ({
   name: string;
 }) => {
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
+  
   useEffect(() => {
     if (localVideoRef.current) {
       localVideoRef.current.srcObject = stream;
@@ -789,27 +842,36 @@ const LocalUserPannel = ({
       localVideoRef.current.autoplay = true;
     }
   }, [stream]);
+  
   return (
-    <div
-      className={twMerge(
-        "overflow-hidden relative h-[40vh] w-[40vw] border border-white/30 bg-black/10 rounded-xl p-2 flex justify-center items-center"
-      )}
-    >
+    <div className="relative overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl shadow-xl group hover:shadow-2xl transition-all duration-300 aspect-video">
       {stream ? (
         <video
           ref={localVideoRef}
           autoPlay
           playsInline
-          className="h-full w-full"
+          className="h-full w-full object-cover rounded-2xl"
         />
       ) : (
-        <>
-          <p className="absolute left-0 bottom-0 text-lg p-2 px-3 w-auto h-auto bg-black/20">
-            You
-          </p>
-          <Avvvatars value={name} size={95} />
-        </>
+        <div className="h-full w-full flex flex-col items-center justify-center">
+          <div className="mb-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+            <Avvvatars value={name} size={60} />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl" />
+        </div>
       )}
+      
+      {/* User Label */}
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
+        <p className="text-white font-medium text-sm lg:text-base truncate">
+          You ({name})
+        </p>
+      </div>
+      
+      {/* Online Indicator */}
+      <div className="absolute top-3 right-3">
+        <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+      </div>
     </div>
   );
 };
@@ -832,17 +894,27 @@ const UserCarousel = ({
       {users.map((user) => (
         <div
           key={user.userId}
-          className={twMerge(
-            "overflow-hidden relative h-[40vh] w-[40vw] border border-white/30 bg-black/10 rounded-xl p-2 flex justify-center items-center"
-          )}
+          className="relative overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl shadow-xl group hover:shadow-2xl transition-all duration-300 aspect-video"
         >
           {user.producers.length <= 0 ? (
-            <>
-              <p className="absolute left-0 bottom-0 text-lg p-2 px-3 w-auto h-auto bg-black/20">
-                {user.name}
-              </p>
-              <Avvvatars value={user.name} size={95} />
-            </>
+            <div className="h-full w-full flex flex-col items-center justify-center">
+              <div className="mb-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                <Avvvatars value={user.name} size={60} />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl" />
+              
+              {/* User Label */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
+                <p className="text-white font-medium text-sm lg:text-base truncate">
+                  {user.name}
+                </p>
+              </div>
+              
+              {/* Online Indicator */}
+              <div className="absolute top-3 right-3">
+                <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+              </div>
+            </div>
           ) : (
             <MemoizedUserPannel user={user} />
           )}
@@ -871,19 +943,84 @@ const UserPannel = ({ user }: { user: MergedData }) => {
     });
   }, [user]);
 
-  if (!videoRef.current?.srcObject && audioRef.current?.srcObject) {
-    <>
-      <p className="absolute left-0 bottom-0 text-lg p-2 px-3 w-auto h-auto bg-black/20">
-        {user.name}
-      </p>
-      <audio ref={audioRef} autoPlay />
-      <Avvvatars value={user.name} size={95} />
-    </>;
+  const hasVideo = user.producers.some(p => p.kind === "video");
+  const hasAudio = user.producers.some(p => p.kind === "audio");
+
+  if (!hasVideo && hasAudio) {
+    return (
+      <div className="h-full w-full flex flex-col items-center justify-center relative">
+        <div className="mb-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+          <Avvvatars value={user.name} size={60} />
+        </div>
+        <audio ref={audioRef} autoPlay />
+        
+        {/* Audio Wave Animation */}
+        <div className="absolute bottom-20 flex space-x-1">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={i}
+              className="w-1 bg-blue-400 rounded-full animate-pulse"
+              style={{
+                height: '20px',
+                animationDelay: `${i * 0.1}s`,
+                animationDuration: '0.8s'
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl" />
+        
+        {/* User Label */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
+          <p className="text-white font-medium text-sm lg:text-base truncate">
+            {user.name}
+          </p>
+        </div>
+        
+        {/* Online Indicator */}
+        <div className="absolute top-3 right-3">
+          <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+        </div>
+      </div>
+    );
   }
+
   return (
-    <div className="h-full w-full">
-      <video ref={videoRef} autoPlay playsInline className="h-full w-full" />
+    <div className="h-full w-full relative group">
+      <video 
+        ref={videoRef} 
+        autoPlay 
+        playsInline 
+        className="h-full w-full object-cover rounded-2xl" 
+      />
       <audio ref={audioRef} autoPlay playsInline />
+      
+      {/* User Label */}
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-white font-medium text-sm lg:text-base truncate">
+          {user.name}
+        </p>
+      </div>
+      
+      {/* Online Indicator */}
+      <div className="absolute top-3 right-3">
+        <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+      </div>
+      
+      {/* Audio/Video Status Icons */}
+      <div className="absolute top-3 left-3 flex space-x-2">
+        {hasAudio && (
+          <div className="bg-black/50 backdrop-blur-sm rounded-full p-2">
+            <TbMicrophoneFilled className="text-green-400 text-sm" />
+          </div>
+        )}
+        {hasVideo && (
+          <div className="bg-black/50 backdrop-blur-sm rounded-full p-2">
+            <FaVideo className="text-blue-400 text-sm" />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

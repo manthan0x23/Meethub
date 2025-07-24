@@ -10,12 +10,12 @@ const HomeIndex = () => {
   const navigate = useNavigate();
 
   const EnterRoom = () => {
-    if (!roomId) {
-      alert("Please Enter RoomId");
+    if (!roomId?.trim()) {
+      alert("Please enter a Room ID");
       return;
     }
-    if (!name) {
-      alert("Please Enter your name");
+    if (!name?.trim()) {
+      alert("Please enter your name");
       return;
     }
     navigate(`/r/${roomId}/u/${name}`);
@@ -28,45 +28,57 @@ const HomeIndex = () => {
   };
 
   return (
-    <div className="bg-white text-white h-screen w-screen flex flex-col gap-5 justify-center p-[3rem] items-center">
-      <div className=" text-black flex justify-center items-center gap-2">
-        <img src={lander} className="h-[2.5rem] w-[2.5rem]" />
-        <p className="text-4xl text-blue/90 font-semibold font-poppins">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 to-blue-100 flex flex-col justify-center items-center p-4">
+      <div className="flex items-center gap-3 mb-8">
+        <img src={lander} alt="Logo" className="h-10 w-10" />
+        <h1 className="text-3xl md:text-4xl font-bold text-blue-700">
           Meethub
-        </p>
+        </h1>
       </div>
-      <div className="w-[30vw] h-[45vh] rounded-lg bg-yellow-50/10 border flex justify-center items-center">
-        <div className="flex flex-col justify-center items-center  text-2xl w-[60%] gap-5  ">
-          <p className="font-semibold text-blue-600">Create or Join Room</p>
-          <div className="flex justify-center h-auto items-center w-full gap-3">
-            <TextField
-              onKeyDown={(e) => onKeyEnter(e)}
-              type="text"
-              value={roomId}
-              fullWidth
-              onChange={(e) => setRoomId(e.target.value)}
-              placeholder="Enter your roomId"
-              label="RoomId"
-            />
-          </div>
-          <TextField
-            onKeyDown={(e) => onKeyEnter(e)}
-            type="text"
-            value={name || ""}
-            fullWidth
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name"
-            label="Name"
-          />
-          <Button
-            onClick={EnterRoom}
-            variant="contained"
-            size="medium"
-            sx={{ fontWeight: 600, fontSize: ".9rem" }}
-          >
-            Join
-          </Button>
-        </div>
+
+      <div className="bg-white shadow-lg rounded-xl w-full max-w-md p-8 flex flex-col gap-6">
+        <h2 className="text-2xl font-semibold text-center text-blue-600">
+          Create or Join Room
+        </h2>
+
+        <TextField
+          onKeyDown={onKeyEnter}
+          type="text"
+          value={roomId}
+          onChange={(e) => setRoomId(e.target.value)}
+          placeholder="Room ID"
+          label="Room ID"
+          fullWidth
+          size="small"
+        />
+
+        <TextField
+          onKeyDown={onKeyEnter}
+          type="text"
+          value={name || ""}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your Name"
+          label="Name"
+          fullWidth
+          size="small"
+        />
+
+        <Button
+          onClick={EnterRoom}
+          variant="contained"
+          size="large"
+          sx={{
+            fontWeight: 600,
+            textTransform: "none",
+            backgroundColor: "#003CFF",
+            "&:hover": {
+              backgroundColor: "#002bbf",
+            },
+          }}
+          fullWidth
+        >
+          Join
+        </Button>
       </div>
     </div>
   );
